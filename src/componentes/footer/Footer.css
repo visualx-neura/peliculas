@@ -1,0 +1,25 @@
+.footer {
+    background-color: #4a90e2; /* Usa el color del header */
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer__content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .footer__logo {
+    width: 40px; /* Ajusta el tamaño del logo */
+    height: auto;
+  }
+  
+  .footer__text {
+    color: white;
+    font-size: 1rem;
+  }
+  
+  

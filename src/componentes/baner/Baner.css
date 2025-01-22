@@ -1,0 +1,35 @@
+
+.banner {
+  background-image: url('trailer.jpg');
+  width: 1700px;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* Color del texto, puedes ajustarlo */
+  text-align: center;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.5); /* Color negro con 50% de opacidad */
+}
+
+.banner__title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 80px; /* Ajusta el valor según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.banner__subtitle {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 250px; /* Ajusta el valor según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  
+}
