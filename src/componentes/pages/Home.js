@@ -1,37 +1,62 @@
-import React from "react";
-import "./Home.css";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../../supabasecliente/SupabaseClient";
+import "./Home.css"; // Nuevo CSS
 
-function Home({ videos, categorias, onEditVideo, onDeleteVideo }) {
+function Home({ categorias = [] }) {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const { data, error } = await supabase.from("videos").select("*");
+      console.log("Respuesta de Supabase:", data);
+      if (error) {
+        console.error("Error al obtener videos:", error);
+      } else {
+        console.log("Videos obtenidos de la BD:", data);
+        setVideos(data || []);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
   return (
-    <div className="home-container">
-      <h2>Lista de Videos por Categoría</h2>
-      {categorias.map((categoria, catIndex) => (
-        <div key={catIndex} className="categoria-section">
-          <h3 className={`categoria-titulo categoria-${catIndex}`}>{categoria}</h3>
-          <div className="video-container">
-            {videos.filter(video => video.categoria === categoria).length > 0 ? (
-              videos.filter(video => video.categoria === categoria).map((video, vidIndex) => (
-                <div key={vidIndex} className="video-cuadro">
-                  <strong>{video.titulo}</strong>
-                  <iframe 
-                    src={video.url} 
-                    title={video.titulo} 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen>
-                  </iframe>
-                  <div className="video-actions">
-                    <button onClick={() => onEditVideo(video)}>Editar</button>
-                    <button onClick={() => onDeleteVideo(video.id)}>Borrar</button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No hay videos en esta categoría.</p>
-            )}
+    <div className="home-wrapper">
+      <h2 className="home-title">Categorías ¡Las Mejores Películas!</h2>
+      {categorias.length > 0 ? (
+        categorias.map((categoria, index) => (
+          <div key={index} className="category-section">
+            <h3 className="category-title">{categoria}</h3>
+            <div className="videos-grid">
+              {videos.filter((video) =>
+                video.categoria.trim().toLowerCase() === categoria.trim().toLowerCase()
+              ).length > 0 ? (
+                videos
+                  .filter((video) =>
+                    video.categoria.trim().toLowerCase() === categoria.trim().toLowerCase()
+                  )
+                  .map((video) => (
+                    <div key={video.id} className="video-card">
+                      <strong className="video-title">{video.titulo}</strong>
+                      <iframe
+                        className="video-frame"
+                        src={video.url}
+                        title={video.titulo}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  ))
+              ) : (
+                <p className="no-videos-message">No hay videos en esta categoría.</p>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="no-categories-message">No hay categorías disponibles.</p>
+      )}
     </div>
   );
 }

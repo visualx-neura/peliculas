@@ -1,5 +1,5 @@
 import React from "react";
-import "./Categorias.css";
+
 
 function Categorias({ categorias }) {
   if (!categorias || !Array.isArray(categorias)) {

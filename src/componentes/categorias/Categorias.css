@@ -1,4 +1,9 @@
 /* Home.css */
+
+body {
+  background-color: red !important;
+}
+
 .home-container {
   background-color: #03122f; /* Fondo negro */
   padding: 20px;

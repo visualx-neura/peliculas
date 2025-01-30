@@ -1,59 +1,58 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./componentes/Header/Header";
-import Baner from "./componentes/baner/Baner";
-import Categorias from "./componentes/categorias/Categorias";
-import Formulario1 from "./componentes/formulario/Formulario";
-import Footer from "./componentes/footer/Footer";
-import Home from "./componentes/pages/Home";
-import FormularioWrapper from "./components/FormularioWrapper";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './componentes/Header/Header';
+import Baner from './componentes/baner/Baner';
+import Categorias from './componentes/categorias/Categorias';
+import Formulario1 from './componentes/formulario/Formulario';
+import Footer from './componentes/footer/Footer';
+import Home from './componentes/pages/Home';
+import Modal from './componentes/modal/Modal';
+import ValidacionUsuario from './componentes/validacionUsuario/ValidacionUsuario';
 
 function App() {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  const [videos, setVideos] = useState([]);
-  const [videoEditado, setVideoEditado] = useState(null);
+  const [usuarioValido, setUsuarioValido] = useState(false);
+  const [mostrarValidacion, setMostrarValidacion] = useState(false);
 
-  const categorias = ["Acción", "Comedia", "Drama", "Documental"];
+  // Array de categorías
+  const categorias = ['Acción', 'Comedia', 'Drama', 'Documental'];
 
   const toggleFormulario = () => {
     setMostrarFormulario(!mostrarFormulario);
   };
 
-  const agregarVideo = (video) => {
-    if (videoEditado) {
-      setVideos(videos.map(v => v.id === videoEditado.id ? video : v));
-      setVideoEditado(null);
-    } else {
-      setVideos([...videos, { ...video, id: videos.length + 1 }]);
-    }
+  const toggleValidacion = () => {
+    setMostrarValidacion(!mostrarValidacion);
   };
 
-  const handleEditVideo = (video) => {
-    setVideoEditado(video);
-    setMostrarFormulario(true);
-  };
-
-  const handleDeleteVideo = (videoId) => {
-    setVideos(videos.filter(video => video.id !== videoId));
+  const handleUsuarioValido = () => {
+    setUsuarioValido(true);
+    setMostrarValidacion(false);
   };
 
   return (
     <Router>
-      <Header onNuevoVideoClick={toggleFormulario} />
+      <Header 
+        onNuevoVideoClick={toggleFormulario} 
+        onAdminClick={toggleValidacion} 
+        mostrarNuevoVideo={usuarioValido} // Solo el admin puede acceder
+      />
       <Baner />
-      {mostrarFormulario && <Formulario1 categorias={categorias} onAgregarVideo={agregarVideo} videoEditado={videoEditado} />}
+      {mostrarFormulario && <Formulario1 categorias={categorias} />}
       <Routes>
-        <Route path="/" element={<Home videos={videos} categorias={categorias} onEditVideo={handleEditVideo} onDeleteVideo={handleDeleteVideo} />} />
+        {/* Pasamos el prop `categorias` a Home */}
+        <Route path="/" element={<Home categorias={categorias} />} />
         <Route path="/categorias" element={<Categorias categorias={categorias} />} />
-        <Route path="/nuevo-video" element={<FormularioWrapper categorias={categorias} onAgregarVideo={agregarVideo} videoEditado={videoEditado} />} />
       </Routes>
       <Footer />
+      {mostrarValidacion && (
+        <Modal onClose={toggleValidacion}>
+          <ValidacionUsuario onLogin={handleUsuarioValido} />
+        </Modal>
+      )}
     </Router>
   );
 }
 
 export default App;
-
-
-
 
