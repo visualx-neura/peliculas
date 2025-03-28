@@ -47,3 +47,52 @@
   box-shadow: 0 0 0 3px rgba(34, 113, 209, 0.5);
 }
 
+@media screen and (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  .header h1{
+    font-size: 18px;
+  }
+
+  .header__logo {
+    font-size: 1.5rem;
+  }
+
+  .header__nav {
+    flex-direction: column;
+    gap: 1rem; /* Menos espacio entre los botones */
+  }
+
+  .header__button {
+    width: auto; /* Ancho adaptativo */
+    height: auto; /* Alto adaptativo */
+    font-size: 1rem; /* Tamaño de letra más pequeño */
+    padding: 0.5rem 1rem; /* Botones más compactos */
+  }
+}
+
+/* Para celulares (max-width: 480px) */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .header__logo {
+    font-size: 1.2rem;
+  }
+
+  .header__nav {
+    flex-direction: column;
+    gap: 0.5rem; /* Menos espacio entre los botones */
+  }
+
+  .header__button {
+    width: 100%; /* Botones ocupan todo el ancho */
+    font-size: 0.9rem; /* Tamaño de letra más pequeño */
+    padding: 0.5rem; /* Botones más compactos */
+  }
+}

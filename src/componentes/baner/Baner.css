@@ -33,3 +33,67 @@
   transform: translateX(-50%);
   
 }
+
+/* Estilos generales para el banner */
+.banner {
+  background-image: url('trailer.jpg');
+  width: 100%; /* Ancho adaptativo */
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* Color del texto */
+  text-align: center;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.5); /* Color negro con opacidad */
+}
+
+.banner__title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.banner__subtitle {
+  font-size: 1.5rem;
+}
+
+/* Media Queries para dispositivos más pequeños */
+
+/* Para tablets (max-width: 768px) */
+@media screen and (max-width: 1024px) {
+  .banner {
+    height: 350px; /* Altura más compacta */
+  }
+
+  .banner__title {
+    font-size: 2rem; /* Tamaño más pequeño */
+    top: 70px; /* Ajuste de posición */
+
+  }
+
+  .banner__subtitle {
+    font-size: 1.2rem;
+    top: 200px; /* Ajuste de posición */
+  }
+}
+
+/* Para celulares (max-width: 480px) */
+@media screen and (max-width: 768px) {
+  .banner {
+    height: 250px; /* Altura reducida */
+  }
+
+  .banner__title {
+    font-size: 1.1rem; /* Tamaño reducido */
+    top: 130px; /* Ajuste de posición */
+  }
+
+  .banner__subtitle {
+    font-size: 1rem;
+    top: 150px; /* Ajuste de posición */
+  }
+}
