@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__content">
         <img
-          src="placeholder-for-logo.png" // Cambia esto por la ruta de tu logo
+          src="./logo_visual_x.png" // Cambia esto por la ruta de tu logo
           alt="Logo del Footer"
           className="footer__logo"
         />
